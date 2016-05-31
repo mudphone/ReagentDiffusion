@@ -24,15 +24,17 @@
 (defn mount-root []
   (reagent/render [home-page] (.getElementById js/document "app")))
 
+(defn create-channel! []
+  (let [chan (ch/create-join-query-channel! (ch/connect-socket! socket) "diffusion:1")]
+    (-> chan 
+        (.on "ping" #(let [{count "count"} (js->clj %1)]
+                       (.log js/console "PING" count)
+                       (swap! counter inc))))
+    chan))
+
 (defn setup-channel! []
-  (if (nil? @channel)
-    (reset! channel
-            (let [chan (ch/create-join-query-channel! (ch/connect-socket! socket) "diffusion:1")]
-              (-> chan 
-               (.on "ping" #(let [{count "count"} (js->clj %1)]
-                              (.log js/console "PING" count)
-                              (swap! counter inc))))
-              chan))))
+  (swap! channel
+         #(if-not (nil? %1) %1 (create-channel!))))
 
 (defn init! []
   (mount-root)
