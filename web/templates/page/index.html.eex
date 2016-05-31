@@ -1,7 +1,10 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2>Diffusion</h2>
+  <p class="lead">Reagent Diffusion on the Phoenix Framework</p>
 </div>
+
+<div id="app"></div>
+<script src="<%= static_path(@conn, "/js/compiled/main.js") %>"></script>
 
 <div class="row marketing">
   <div class="col-lg-6">

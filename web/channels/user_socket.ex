@@ -3,6 +3,7 @@ defmodule Diffusion.UserSocket do
 
   ## Channels
   # channel "rooms:*", Diffusion.RoomChannel
+  channel "diffusion:*", Diffusion.DiffusionChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

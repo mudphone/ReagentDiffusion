@@ -9,7 +9,8 @@
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.22"]
                  [reagent-utils "0.1.7"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [cljsjs/phoenix "1.1.4-0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
@@ -23,11 +24,13 @@
   :resource-paths ["public"]
 
   :cljsbuild {:builds {:app {:source-paths ["src"]
-                             :compiler {:output-to "public/js/app.js"
-                                        :output-dir "public/js/out"
-                                        :asset-path   "js/out"
-                                        :optimizations :none
-                                        :pretty-print  true}}}}
+                             :compiler {:output-to "../priv/static/js/compiled/main.js"
+                                        :output-dir "../priv/static/js/compiled/out"
+                                        :verbose true 
+                                        :asset-path     "js/compiled/out"
+                                        :optimizations  :none
+                                        :pretty-print   true
+                                        :parallel-build true}}}}
 
   :profiles {:dev {:dependencies [[prone "1.1.0"]
                                   [lein-figwheel "0.5.2"]
@@ -38,6 +41,7 @@
 
                    :figwheel {:http-server-root "public"
                               :nrepl-port 7002
+                              :server-port 3449
                               :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
                               :css-dirs ["public/css"]}
 

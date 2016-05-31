@@ -17,7 +17,8 @@ config :diffusion, Diffusion.Endpoint,
 config :diffusion, Diffusion.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/js/app.js},
+      ~r{priv/static/.*(css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex)$}
