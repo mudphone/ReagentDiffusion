@@ -11,6 +11,10 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
+## WAT IS
+
+* This is a diffustion experiment based on [Daniel Shiffman's lecture](https://www.youtube.com/watch?v=BV9ny785UNc)
+
 ## WAT DO
 
 * mix phoenix.new diffusion
