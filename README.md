@@ -13,7 +13,7 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 
 ## WAT IS
 
-* This is a diffustion experiment based on [Daniel Shiffman's lecture](https://www.youtube.com/watch?v=BV9ny785UNc)
+* This is a diffustion experiment based on [Daniel Shiffman's lecture](https://www.youtube.com/watch?v=BV9ny785UNc).
 
 ## WAT DO
 
