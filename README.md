@@ -1,21 +1,12 @@
 # Diffusion
 
-To start your Phoenix app:
-
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `npm install`
-  * Start Phoenix endpoint with `mix phoenix.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## WAT IS
+## What is this?
 
 * This is a diffustion experiment based on [Daniel Shiffman's lecture](https://www.youtube.com/watch?v=BV9ny785UNc).
+* Diffusion based on [Reaction-Diffusion Tutorial](karlsims.com/rd.html), by Karl Sims
+* Wikipedia [page for Reaction-diffusion](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system)
 
-## WAT DO
+## What was done...
 
 * mix phoenix.new diffusion
 * cd diffusion
@@ -59,3 +50,16 @@ Don't know if this works yet...
 lein clean
 lein cljsbuild once min
 ```
+
+## Startup
+
+To start your Phoenix app:
+
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+  * Install Node.js dependencies with `npm install`
+  * Start Phoenix endpoint with `mix phoenix.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
