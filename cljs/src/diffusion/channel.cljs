@@ -5,7 +5,7 @@
 
 (defn create-socket []
   (new Phoenix.Socket "/socket" #js {:params #js {:token window.userToken}
-                                   :logger #(.log js/console (str "w00t! " %1 ": " %2) %3)}))
+                                     :logger #(.log js/console (str "w00t! " %1 ": " %2) %3)}))
 
 (defn connect-socket! [socket]
   (.connect socket)

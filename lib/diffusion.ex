@@ -13,6 +13,7 @@ defmodule Diffusion do
       supervisor(Diffusion.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Diffusion.Worker, [arg1, arg2, arg3]),
+      worker(Diffusion.Grid, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

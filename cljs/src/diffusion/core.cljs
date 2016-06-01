@@ -27,7 +27,8 @@
 (defn create-channel! []
   (let [chan (ch/create-join-query-channel! (ch/connect-socket! socket) "diffusion:1")]
     (-> chan 
-        (.on "ping" #(let [{count "count"} (js->clj %1)]
+        (.on "ping" #(let [{count "count" grid "grid"} (js->clj %1)]
+                       (reset! canvas/grid grid)
                        (.log js/console "PING" count)
                        (swap! counter inc))))
     chan))
