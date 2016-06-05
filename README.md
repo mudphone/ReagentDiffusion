@@ -3,7 +3,7 @@
 ## What is this?
 
 * This is a diffustion experiment based on [Daniel Shiffman's lecture](https://www.youtube.com/watch?v=BV9ny785UNc).
-* Diffusion based on [Reaction-Diffusion Tutorial](karlsims.com/rd.html), by Karl Sims
+* Diffusion based on [Reaction-Diffusion Tutorial](http://karlsims.com/rd.html), by Karl Sims
 * Wikipedia [page for Reaction-diffusion](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system)
 
 ## What was done...
