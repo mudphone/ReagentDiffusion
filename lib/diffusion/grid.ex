@@ -36,7 +36,7 @@ defmodule Diffusion.Grid do
   end
   
   defp seed_grid(g) do
-    seed_box = for x <- 50..59, y <- 50..59, do: [x, y]
+    seed_box = for x <- 45..54, y <- 45..54, do: [x, y]
     Enum.reduce(seed_box, g, fn([x, y], acc) ->
       Map.update!(acc, grid_key(x, y), &(Map.put(&1, :b, 1.0)))
     end)
@@ -127,8 +127,6 @@ defmodule Diffusion.Grid do
   end
 
   def handle_cast(:update, g) do
-    Logger.debug "update!"
-    
     {:noreply, update_grid(g)}
   end
 

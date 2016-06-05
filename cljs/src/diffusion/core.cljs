@@ -26,10 +26,10 @@
 
 (defn create-channel! []
   (let [chan (ch/create-join-query-channel! (ch/connect-socket! socket) "diffusion:1")]
-    #_(-> chan 
+    (-> chan 
         (.on "ping" #(let [{count "count"} (js->clj %1)]
                        (.log js/console "PING" count)
-                       (swap! counter inc))))
+                       (reset! counter count))))
     (-> chan
         (.on "grid" #(let [{grid "grid"} (js->clj %1)]
                        (reset! canvas/grid grid))))

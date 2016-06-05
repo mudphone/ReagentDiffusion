@@ -3,8 +3,8 @@ defmodule Diffusion.DiffusionChannel do
   alias Diffusion.Grid
 
   def join("diffusion:" <> diff_id, _params, socket) do
-    # :timer.send_interval(2_000, :ping)
-    :timer.send_interval(100, :update)
+    :timer.send_interval(2_000, :ping)
+    :timer.send_interval(88, :update)
     :timer.send_interval(1_000, :grid)
     s = socket
     |> assign(:diff_id, String.to_integer(diff_id))
