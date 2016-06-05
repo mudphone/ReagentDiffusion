@@ -8,7 +8,7 @@
 (defn draw-point
   ([ctx x y gray size]
    (set! (.-fillStyle ctx)
-         (str "rgba(" gray ", " gray ", " gray ", 255"))
+         (str "rgba(" gray ", " gray ", " gray ", 1.0)"))
    (.fillRect ctx x y size size))
   ([ctx x y gray]
    (draw-point ctx x y gray 1)))
@@ -17,11 +17,17 @@
   "Draw grid which comes from Phoenix channel as:
    {\"x,y\" {:a a-val :b b-val} ...}"
   [ctx g]
-  (doseq [[k {:keys [a b]}] g]
-    (let [[x y] (map #(js/parseInt % 10)
+  (doseq [[k cell] g]
+    (let [{a "a" b "b"} cell
+          [x y] (map #(js/parseInt % 10)
                      (str/split k (re-pattern ",")))
-          gray (* 255 (- a b))]
-      (draw-point ctx x y gray 40))))
+          gray (-> (Math/floor (* 255.0 (- a b)))
+                   (max 0.0)
+                   (min 255.0))]
+      #_(if (and (= 0 (mod x 20)) (= 0 (mod y 20)))
+        (.log js/console "gray: " gray " a: " a " b: " b " cell: " cell))
+      (draw-point ctx x y gray)))
+)
 
 (defn draw-canvas-contents [ canvas ]
   (let [ctx (.getContext canvas "2d")

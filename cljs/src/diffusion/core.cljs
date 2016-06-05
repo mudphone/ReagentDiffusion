@@ -16,7 +16,7 @@
 (defn home-page []
   [:div
    [:h2 "Counter: " @counter]
-   [canvas/div-with-canvas 200 200]])
+   [canvas/div-with-canvas 100 100]])
 
 ;; -------------------------
 ;; Initialize app
@@ -26,11 +26,13 @@
 
 (defn create-channel! []
   (let [chan (ch/create-join-query-channel! (ch/connect-socket! socket) "diffusion:1")]
-    (-> chan 
-        (.on "ping" #(let [{count "count" grid "grid"} (js->clj %1)]
-                       (reset! canvas/grid grid)
+    #_(-> chan 
+        (.on "ping" #(let [{count "count"} (js->clj %1)]
                        (.log js/console "PING" count)
                        (swap! counter inc))))
+    (-> chan
+        (.on "grid" #(let [{grid "grid"} (js->clj %1)]
+                       (reset! canvas/grid grid))))
     chan))
 
 (defn setup-channel! []

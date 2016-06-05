@@ -3,20 +3,30 @@ defmodule Diffusion.DiffusionChannel do
   alias Diffusion.Grid
 
   def join("diffusion:" <> diff_id, _params, socket) do
-    :timer.send_interval(2_000, :ping)
+    # :timer.send_interval(2_000, :ping)
+    :timer.send_interval(100, :update)
+    :timer.send_interval(1_000, :grid)
     s = socket
     |> assign(:diff_id, String.to_integer(diff_id))
-    |> assign(:grid, Grid.grid())
     {:ok, s}
   end
-
+  
   def handle_info(:ping, socket) do
     count = socket.assigns[:count] || 1
-    grid = socket.assigns[:grid]
-    
-    push socket, "ping", %{count: count, grid: grid}
+    push socket, "ping", %{count: count}
 
     {:noreply, assign(socket, :count, count + 1)}
+  end
+
+  def handle_info(:grid, socket) do
+    grid = Grid.grid()
+    push socket, "grid", %{grid: grid}
+    {:noreply, assign(socket, :grid, grid)}
+  end
+  
+  def handle_info(:update, socket) do
+    Grid.update()
+    {:noreply, socket}
   end
 
 end
