@@ -28,18 +28,18 @@ defmodule Diffusion.Grid.Memory do
 
   defp grid_key(x, y), do: "#{x},#{y}"
   
-  defp to_pure_map(g) do
+  defp js_mappable(g) do
     Enum.reduce(g, %{}, fn({[x, y], %Cell{a: a, b: b}}, acc) ->
       Map.put(acc, grid_key(x, y), %{a: a, b: b})
     end)
   end
 
   def handle_call(:grid, _from, g) do
-    {:reply, g |> to_pure_map(), g}
+    {:reply, js_mappable(g), g}
   end
 
   def handle_cast(:update, g) do
-    {:noreply, Grid.update_grid(g)}
+    {:noreply, Grid.update_grid(g, limit: 1_000, timeout: 15_000)}
   end
 
 end

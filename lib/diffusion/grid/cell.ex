@@ -57,20 +57,18 @@ defmodule Diffusion.Grid.Cell do
     |> Map.put(:a, new_a)
     |> Map.put(:b, new_b)
   end
-   
+  
   # OTP
   
-  def start_link(coord, grid, query_ref, owner, limit \\ nil) do
-    Task.start_link(__MODULE__, :fetch, [coord, grid, query_ref, owner, limit])
+  def start_link(coord_chunk, grid, query_ref, owner) do
+    Task.start_link(__MODULE__, :fetch, [coord_chunk, grid, query_ref, owner])
   end
 
-  def fetch(coord, grid, query_ref, owner, _limit) do
-    cell = update_cell(Map.get(grid, coord), grid)
-    send_results(cell, query_ref, owner)
-  end
-
-  defp send_results(cell, query_ref, owner) do
-    results = [cell]
+  def fetch(coord_chunk, grid, query_ref, owner) do
+    results = Enum.map(coord_chunk, fn (coord) ->
+      update_cell(Map.get(grid, coord), grid)
+    end)
     send(owner, {:results, query_ref, results})
   end
+
 end

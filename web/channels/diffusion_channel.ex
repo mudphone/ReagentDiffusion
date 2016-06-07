@@ -4,7 +4,7 @@ defmodule Diffusion.DiffusionChannel do
 
   def join("diffusion:" <> diff_id, _params, socket) do
     :timer.send_interval(2_000, :ping)
-    :timer.send_interval(500, :update)
+    :timer.send_interval(50, :update)
     :timer.send_interval(1_000, :grid)
 
     s = socket
