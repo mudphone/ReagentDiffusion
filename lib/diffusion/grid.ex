@@ -1,8 +1,11 @@
 defmodule Diffusion.Grid do
-  alias Diffusion.Cell
+  alias Diffusion.Grid.Cell
+
+  @grid_width 60
+  @grid_height 60
   
-  def start_link(coord, query_ref, owner) do
-    Cell.start_link(coord, query_ref, owner)
+  def start_link(coord, grid, query_ref, owner) do
+    Cell.start_link(coord, grid, query_ref, owner)
   end
 
   defp spawn_query(coord, grid) do
@@ -43,9 +46,9 @@ defmodule Diffusion.Grid do
   end
   
   def seed_grid(g) do
-    seed_box = for x <- 45..54, y <- 45..54, do: [x, y]
-    Enum.reduce(seed_box, g, fn([x, y]=k, acc) ->
-      Map.update!(acc, k, &(Map.put(&1, :b, 1.0)))
+    seed_box = for x <- 5..8, y <- 5..8, do: [x, y]
+    Enum.reduce(seed_box, g, fn(coord, acc) ->
+      Map.update!(acc, coord, &(Map.put(&1, :b, 1.0)))
     end)
   end
 

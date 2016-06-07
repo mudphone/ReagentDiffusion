@@ -1,11 +1,12 @@
 defmodule Diffusion.DiffusionChannel do
   use Diffusion.Web, :channel
-  alias Diffusion.Grid
+  alias Diffusion.Grid.Memory
 
   def join("diffusion:" <> diff_id, _params, socket) do
     :timer.send_interval(2_000, :ping)
-    :timer.send_interval(88, :update)
+    :timer.send_interval(500, :update)
     :timer.send_interval(1_000, :grid)
+
     s = socket
     |> assign(:diff_id, String.to_integer(diff_id))
     {:ok, s}
@@ -19,13 +20,13 @@ defmodule Diffusion.DiffusionChannel do
   end
 
   def handle_info(:grid, socket) do
-    grid = Grid.grid()
+    grid = Memory.grid()
     push socket, "grid", %{grid: grid}
     {:noreply, assign(socket, :grid, grid)}
   end
   
   def handle_info(:update, socket) do
-    Grid.update()
+    Memory.update()
     {:noreply, socket}
   end
 

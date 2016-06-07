@@ -1,6 +1,7 @@
 defmodule Diffusion.Grid.Memory do
   use GenServer
   alias Diffusion.Grid
+  alias Diffusion.Grid.Cell
   
   # Interface
 

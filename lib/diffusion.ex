@@ -12,10 +12,11 @@ defmodule Diffusion do
       # Start the Ecto repository
       supervisor(Diffusion.Repo, []),
       # Grid
-      supervisor(Diffusion.Grid.Supervisor, [])
+      supervisor(Diffusion.Grid.Supervisor, []),
+      worker(Diffusion.Grid.Memory, [])
+      
       # Here you could define other workers and supervisors as children
       # worker(Diffusion.Worker, [arg1, arg2, arg3]),
-      worker(Diffusion.Grid.Memory, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

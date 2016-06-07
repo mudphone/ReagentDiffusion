@@ -1,8 +1,6 @@
-defmodule Diffusion.Cell do
+defmodule Diffusion.Grid.Cell do
+  alias Diffusion.Grid.Cell
   defstruct a: 1.0, b: 0.0, x: nil, y: nil
-
-  @grid_width 100
-  @grid_height 100
 
   @dA 1.0
   @dB 0.5
@@ -19,15 +17,15 @@ defmodule Diffusion.Cell do
   #   v6, v7, v8
   #
   defp laplace(g, x, y) do
-    %Cell{a: v0_a, b: v0_b} = Map.fetch!(g, grid_key(x-1, y-1))
-    %Cell{a: v1_a, b: v1_b} = Map.fetch!(g, grid_key(x,   y-1))
-    %Cell{a: v2_a, b: v2_b} = Map.fetch!(g, grid_key(x+1, y-1))
-    %Cell{a: v3_a, b: v3_b} = Map.fetch!(g, grid_key(x-1, y))
-    %Cell{a: v4_a, b: v4_b} = Map.fetch!(g, grid_key(x,   y))
-    %Cell{a: v5_a, b: v5_b} = Map.fetch!(g, grid_key(x+1, y))
-    %Cell{a: v6_a, b: v6_b} = Map.fetch!(g, grid_key(x-1, y+1))
-    %Cell{a: v7_a, b: v7_b} = Map.fetch!(g, grid_key(x,   y+1))
-    %Cell{a: v8_a, b: v8_b} = Map.fetch!(g, grid_key(x+1, y+1))
+    %Cell{a: v0_a, b: v0_b} = Map.fetch!(g, [x-1, y-1])
+    %Cell{a: v1_a, b: v1_b} = Map.fetch!(g, [x,   y-1])
+    %Cell{a: v2_a, b: v2_b} = Map.fetch!(g, [x+1, y-1])
+    %Cell{a: v3_a, b: v3_b} = Map.fetch!(g, [x-1, y])
+    %Cell{a: v4_a, b: v4_b} = Map.fetch!(g, [x,   y])
+    %Cell{a: v5_a, b: v5_b} = Map.fetch!(g, [x+1, y])
+    %Cell{a: v6_a, b: v6_b} = Map.fetch!(g, [x-1, y+1])
+    %Cell{a: v7_a, b: v7_b} = Map.fetch!(g, [x,   y+1])
+    %Cell{a: v8_a, b: v8_b} = Map.fetch!(g, [x+1, y+1])
     [%{a: v0_a * 0.05, b: v0_b * 0.05},
      %{a: v1_a * 0.2,  b: v1_b * 0.2},
      %{a: v2_a * 0.05, b: v2_b * 0.05},
@@ -62,7 +60,7 @@ defmodule Diffusion.Cell do
    
   # OTP
   
-  def start_link(coord, grid, query_ref, owner, limit) do
+  def start_link(coord, grid, query_ref, owner, limit \\ nil) do
     Task.start_link(__MODULE__, :fetch, [coord, grid, query_ref, owner, limit])
   end
 
