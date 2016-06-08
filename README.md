@@ -6,6 +6,10 @@
 * Diffusion based on [Reaction-Diffusion Tutorial](http://karlsims.com/rd.html), by Karl Sims
 * Wikipedia [page for Reaction-diffusion](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system)
 
+It looks a little like this:
+</br>
+![Diffusion animation](https://github.com/mudphone/ReagentDiffusion/blob/master/web/static/assets/images/diffusion.png)
+
 ## What was done...
 
 * mix phoenix.new diffusion
