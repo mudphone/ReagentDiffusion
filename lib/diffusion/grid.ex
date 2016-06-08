@@ -74,7 +74,7 @@ defmodule Diffusion.Grid do
   end
   
   def seed_grid(g) do
-    seed_box = for x <- 5..8, y <- 5..8, do: [x, y]
+    seed_box = for x <- 45..54, y <- 45..54, do: [x, y]
     Enum.reduce(seed_box, g, fn(coord, acc) ->
       Map.update!(acc, coord, &(Map.put(&1, :b, 1.0)))
     end)
@@ -95,7 +95,7 @@ defmodule Diffusion.Grid do
     # don't update the edges (start at 1 and end at n-2)
     upd_coords = coords(1, @grid_width-2, 1, @grid_height-2)
     next_cells = upd_coords
-    |> Enum.chunk(limit)
+    |> Enum.chunk(limit, limit, [])
     |> Enum.map(&spawn_query(&1, old_grid))
     |> await_results(opts)
 

@@ -2,11 +2,12 @@ defmodule Diffusion.Grid.Memory do
   use GenServer
   alias Diffusion.Grid
   alias Diffusion.Grid.Cell
+  require Logger
   
   # Interface
 
   def grid() do
-    GenServer.call(__MODULE__, :grid, 15_000)
+    GenServer.call(__MODULE__, :grid, 25_000)
   end
 
   def update() do
@@ -20,7 +21,7 @@ defmodule Diffusion.Grid.Memory do
   end
 
   def init(_initial_val) do
-    {:ok, Grid.new_grid() |> Grid.seed_grid()}
+    {:ok, %{grid: Grid.new_grid() |> Grid.seed_grid(), update_count: 0}}
   end
 
   
@@ -34,12 +35,14 @@ defmodule Diffusion.Grid.Memory do
     end)
   end
 
-  def handle_call(:grid, _from, g) do
-    {:reply, js_mappable(g), g}
+  def handle_call(:grid, _from, %{grid: g}=state) do
+    {:reply, js_mappable(g), state}
   end
 
-  def handle_cast(:update, g) do
-    {:noreply, Grid.update_grid(g, limit: 1_000, timeout: 5_000)}
+  def handle_cast(:update, %{grid: grid, update_count: count}=state) do
+    Logger.debug "grid update: #{count}"
+    ng = Grid.update_grid(grid, limit: 2_000, timeout: 5_000)
+    {:noreply, %{state | grid: ng, update_count: count+1}}
   end
 
 end
