@@ -39,7 +39,7 @@ defmodule Diffusion.Grid.Memory do
   end
 
   def handle_cast(:update, g) do
-    {:noreply, Grid.update_grid(g, limit: 1_000, timeout: 15_000)}
+    {:noreply, Grid.update_grid(g, limit: 1_000, timeout: 5_000)}
   end
 
 end

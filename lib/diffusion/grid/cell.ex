@@ -9,7 +9,7 @@ defmodule Diffusion.Grid.Cell do
 
   # Update Cell
 
-    # returns weighted sums of neighbors
+  # returns weighted sums of neighbors
   # v4 is at x,y
   #
   #   v0, v1, v2
